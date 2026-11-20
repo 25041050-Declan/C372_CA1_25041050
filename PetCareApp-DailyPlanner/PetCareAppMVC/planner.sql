@@ -1,0 +1,12 @@
+USE petcare;
+CREATE TABLE IF NOT EXISTS care_routines (
+ id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, pet_id INT UNSIGNED NOT NULL,
+ title VARCHAR(100) NOT NULL, at_time TIME NOT NULL, weekday TINYINT NULL,
+ starts DATE NOT NULL, ends DATE NULL,
+ FOREIGN KEY (pet_id) REFERENCES pets(id) ON DELETE CASCADE
+);
+CREATE TABLE IF NOT EXISTS care_completions (
+ routine_id INT UNSIGNED NOT NULL, care_date DATE NOT NULL,
+ PRIMARY KEY(routine_id, care_date),
+ FOREIGN KEY(routine_id) REFERENCES care_routines(id) ON DELETE CASCADE
+);
